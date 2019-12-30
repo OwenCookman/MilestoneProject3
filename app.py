@@ -10,21 +10,21 @@ def index():
 
 
 @app.route("/login")
-def index():
+def login():
     return render_template("login.html")
 
 
 @app.route("/profile")
-def index():
+def profile():
     return render_template("profile.html")
 
 
 @app.route("/search")
-def index():
+def search():
     return render_template("search.html")
 
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug == True)
+            debug = True)
