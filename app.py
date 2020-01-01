@@ -19,11 +19,6 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route("/search")
-def search():
-    return render_template("search.html")
-
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0",
             port=int(os.environ.get("PORT")),
