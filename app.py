@@ -1,3 +1,4 @@
+import requests as req
 import os
 from flask import Flask, render_template
 
@@ -23,3 +24,8 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0",
             port=int(os.environ.get("PORT")),
             debug=True)
+
+
+h = {'Authorization': 'YOUR_REST_KEY'}
+resp = req.get("https://api2.isbndb.com/book/9781934759486", headers=h)
+print(resp.json())
