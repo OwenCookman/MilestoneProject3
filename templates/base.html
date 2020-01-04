@@ -28,8 +28,8 @@
               <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0" method="POST">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search Books">
+          <form action="{{ url_for('results') }}" class="form-inline my-2 my-lg-0" method="POST">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search Books">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
