@@ -4,8 +4,6 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-book_result = search_result(search_text)
-
 
 def search_result(search_text):
     resp = requests.get(url="http://openlibrary.org/search.json?q=" +
@@ -40,7 +38,7 @@ def results():
     if request.method == "POST":
         search_text = request.form['search']
         search_result(search_text)
-        return render_template("results.html")
+        return render_template("results.html",  book_result = search_result(search_text))
 
 
 if __name__ == "__main__":
