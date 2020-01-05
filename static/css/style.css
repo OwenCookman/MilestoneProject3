@@ -1,11 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
-
 body {
-    background-color: #454545;
+    background-color: #fafafa;
     text-align: center;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
-    color: #fafafa;
 }
 
 .row {
