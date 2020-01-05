@@ -2,8 +2,8 @@
 {% block content %}
 Search results:
 {% for books in book_result %}
-  {% for book in books %}
-    <li><a href="#">{{ book }}</a></li>
-  {% endfor %}
+{% for book in books %}
+<li><a href="#">{{ book }}</a></li>
+{% endfor %}
 {% endfor %}
 {% endblock %}
