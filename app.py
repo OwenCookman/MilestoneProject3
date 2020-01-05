@@ -4,15 +4,20 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+book_result = search_result(search_text)
+
 
 def search_result(search_text):
     resp = requests.get(url="http://openlibrary.org/search.json?q=" +
                         search_text + "&mode=ebooks&has_fulltext=true")
     json = resp.json()
     xx = json['docs']
+    result_list = []
     for item in xx:
-        if 'author_name' in item:
-            print(item['title'], item['author_name'])
+        if 'author_name' in item and 'first_publish_year' in item and 'publisher' in item and 'id_amazon' in item:
+            result_list.append((item['title'], item['author_name'],
+                                item['first_publish_year'], item['publisher'], item['id_amazon']))
+            return result_list
 
 
 @app.route("/")
