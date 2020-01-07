@@ -1,8 +1,11 @@
 import requests
 import os
 from flask import Flask, render_template, request
+from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = '6a03625dd3632ca18bdaf40e76f478bb'
 
 
 def search_result(search_text):
@@ -23,9 +26,16 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/register")
+def register():
+    form = RegistrationForm()
+    return render_template("register.html", form=form)
+
+
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    form = LoginForm()
+    return render_template("login.html", form=form)
 
 
 @app.route("/profile")
