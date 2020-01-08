@@ -1,6 +1,6 @@
 import requests
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, url_for, request, flash, redirect
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
@@ -26,9 +26,12 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/register")
+@app.route("/register", methods=["POST", "GET"])
 def register():
     form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f"Account created successfully!", "success")
+        return redirect(url_for("index"))
     return render_template("register.html", form=form)
 
 
