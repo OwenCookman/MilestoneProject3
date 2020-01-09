@@ -1,5 +1,5 @@
-import requests
 import os
+import requests
 from flask import Flask, render_template, url_for, request, flash, redirect
 from forms import RegistrationForm, LoginForm
 
@@ -9,6 +9,10 @@ app.config['SECRET_KEY'] = '6a03625dd3632ca18bdaf40e76f478bb'
 
 
 def search_result(search_text):
+    """
+    Converts what is taken in from the search bar and fires 
+    a request to the open library 
+    """
     resp = requests.get(url="http://openlibrary.org/search.json?q=" +
                         search_text + "&mode=ebooks&has_fulltext=true")
     json = resp.json()
