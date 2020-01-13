@@ -1,24 +1,24 @@
 import os
 import requests
 from flask import Flask, render_template, url_for, request, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '6a03625dd3632ca18bdaf40e76f478bb'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("MONGO_URI")
 
+db = SQLAlchemy(app)
 
 def search_result(search_text):
     """
-    Converts what is taken in from the search bar and fires 
-    a request to the open library 
     """
-    resp = requests.get(url="http://openlibrary.org/search.json?q=" +
-                        search_text + "&mode=ebooks&has_fulltext=true")
+    resp = requests.get(url=" http://openlibrary.org/api/search?q=" + search_text + "&prettyprint=true")
     json = resp.json()
-    xx = json['docs']
+    library = json['docs']
     result_list = []
-    for item in xx:
+    for item in library:
         if 'author_name' in item and 'first_publish_year' in item and 'publisher' in item and 'id_amazon' in item:
             result_list.append((item['title'], item['author_name'],
                                 item['first_publish_year'], item['publisher'], item['id_amazon']))
