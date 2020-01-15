@@ -12,7 +12,7 @@ def search_result(search_text):
     """
     """
     resp = requests.get(
-        url='http://openlibrary.org/api/search?q={"query":"+ search_text +"}&prettyprint=true')
+        url='https://www.goodreads.com/search.xml?key=8U3Do6kokXXj0Ex1ipnQ&q="+ search_text +"')
     json = resp.json()
     library = json['result']
     result_list = []
