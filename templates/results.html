@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 Search results:
-{% for books in book_result %}
-{% for book in books %}
-<li><a href="#">{{ book }}</a></li>
-{% endfor %}
+{% for results in movie_results %}
+<li>
+    <a href="#">
+        <img src="{{ results['Poster'] }}">{{ results['Title'] }}</img>
+</a>
+</li>
 {% endfor %}
 {% endblock %}
