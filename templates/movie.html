@@ -1,4 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-content
+{% for key in movie_info %}
+{% for i in key %}
+<li>{{ i['Poster'] }}</li>
+<li>{{ i['Title'] }}</li>
+<li>{{ i['Year'] }}</li>
+<li>{{ i['Rated'] }}</li>
+<li>{{ i['Runtime'] }}</li>
+<li>{{ i['Genre'] }}</li>
+<li>{{ i['Director'] }}</li>
+<li>{{ i['Writer'] }}</li>
+<li>{{ i['Plot'] }}</li>
+{% endfor %}
+{% endfor %}
 {% endblock %}
