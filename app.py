@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, request
 import requests
 
 app = Flask(__name__)
@@ -22,6 +22,7 @@ def search_result(search_text):
     for i in search:
         result_list.append(i)
     return result_list
+
 
 @app.route("/")
 def index():
@@ -66,11 +67,22 @@ def results():
         search_result(search_text)
         return render_template("results.html", movie_results=search_result(search_text))
 
-@app.route("/movie")
-def movie():
+
+@app.route("/movie/<imdbID>")
+def movie(imdbID):
     """
+The href of the generated <a> from results.html is taken from the URL
+ and converted in to a python variable which is passed to the API
     """
-    return render_template("movie.html", show_movie = search_result(search_text)[i])
+    resp = requests.get(url='http://www.omdbapi.com/?i=' +
+                        imdbID + '&apikey=45a7f96')
+    json = resp.json()
+    info = json
+    info_list = []
+    for key in info:
+        info_list.append(key)
+        print(info_list)
+    return render_template("movie.html", movie_info=info_list)
 
 
 if __name__ == "__main__":
