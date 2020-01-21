@@ -9,15 +9,19 @@ app.config['DATABASE_URI'] = os.environ.get("MONGO_URI")
 
 def search_result(search_text):
     """
+    Function takes the variable search_text and sends the query to the API
+    The result of the query returns in JSON format and is passed through a
+    for loop which appends each item to the empty list result_list which is
+    then returned.
     """
     resp = requests.get(
         url='http://www.omdbapi.com/?s=' + search_text + '&apikey=45a7f96')
     json = resp.json()
-    results = json['Search']
+    search = json['Search']
     result_list = []
-    for i in results:
+    for i in search:
         result_list.append(i)
-    return(result_list) 
+    return result_list
 
 @app.route("/")
 def index():
@@ -54,7 +58,8 @@ def profile():
 @app.route("/results", methods=["POST"])
 def results():
     """
-    Renders the results.html template
+    Renders the results.html template, the variable movie_results is passed
+    to render the results from search_results()
     """
     if request.method == "POST":
         search_text = request.form['search']
