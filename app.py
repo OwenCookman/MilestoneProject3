@@ -66,6 +66,12 @@ def results():
         search_result(search_text)
         return render_template("results.html", movie_results=search_result(search_text))
 
+@app.route("/movie")
+def movie():
+    """
+    """
+    return render_template("movie.html", show_movie = search_result(search_text)[i])
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
