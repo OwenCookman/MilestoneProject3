@@ -1,16 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for key in movie_info %}
-{% for i in key %}
-<li>{{ i['Poster'] }}</li>
-<li>{{ i['Title'] }}</li>
-<li>{{ i['Year'] }}</li>
-<li>{{ i['Rated'] }}</li>
-<li>{{ i['Runtime'] }}</li>
-<li>{{ i['Genre'] }}</li>
-<li>{{ i['Director'] }}</li>
-<li>{{ i['Writer'] }}</li>
-<li>{{ i['Plot'] }}</li>
-{% endfor %}
-{% endfor %}
+<div class="contaier">
+    <img src="{{ movie_info['Poster'] }}" alt="#">
+    <h1>{{ movie_info['Title'] }}</h1>
+    <div class="row">
+        <div class="col-6">
+            <li>Year of release: {{ movie_info['Year'] }}</li>
+        </div>
+        <div class="col-6">
+            <li>Rated: {{ movie_info['Rated'] }}</li>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <li>Runtime: {{ movie_info['Runtime'] }}</li>
+        </div>
+        <div class="col-6">
+            <li>Genre: {{ movie_info['Genre'] }}</li>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <li>Director(s): {{ movie_info['Director'] }}</li>
+        </div>
+        <div class="col-6">
+            <li>Writer(s): {{ movie_info['Writer'] }}</li>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <li>{{ movie_info['Plot'] }}</li>
+        </div>
+    </div>
+</div>
 {% endblock %}
