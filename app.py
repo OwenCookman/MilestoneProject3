@@ -68,15 +68,15 @@ def results():
         return render_template("results.html", movie_results=search_result(search_text))
 
 
-@app.route("/movie/<imdbID>")
-def movie(imdbID):
+@app.route("/movie/<imdb_id>")
+def movie(imdb_id):
     """
 The href of the generated <a> from results.html is taken from the URL
  and converted in to a python variable which is passed to the API
  the data from the API is then passed to the template movie.html
     """
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
-                        imdbID + '&apikey=45a7f96')
+                        imdb_id + '&apikey=45a7f96')
     info = resp.json()
     return render_template("movie.html", movie_info=info)
 
