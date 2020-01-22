@@ -16,8 +16,8 @@ def search_result(search_text):
     """
     resp = requests.get(
         url='http://www.omdbapi.com/?s=' + search_text + '&apikey=45a7f96')
-    json = resp.json()
-    search = json['Search']
+    result = resp.json()
+    search = result['Search']
     result_list = []
     for i in search:
         result_list.append(i)
@@ -73,16 +73,12 @@ def movie(imdbID):
     """
 The href of the generated <a> from results.html is taken from the URL
  and converted in to a python variable which is passed to the API
+ the data from the API is then passed to the template movie.html
     """
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
                         imdbID + '&apikey=45a7f96')
-    json = resp.json()
-    info = json
-    info_list = []
-    for key in info:
-        info_list.append(key)
-        print(info_list)
-    return render_template("movie.html", movie_info=info_list)
+    info = resp.json()
+    return render_template("movie.html", movie_info=info)
 
 
 if __name__ == "__main__":
