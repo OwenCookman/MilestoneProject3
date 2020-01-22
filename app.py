@@ -64,7 +64,6 @@ def results():
     """
     if request.method == "POST":
         search_text = request.form['search']
-        search_result(search_text)
         return render_template("results.html", movie_results=search_result(search_text))
 
 
