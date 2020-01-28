@@ -3,9 +3,9 @@
 Search results:
 {% for results in movie_results %}
 <li>
-    <a href="/movie/{{ results['imdbID'] }}">
-        <img src="{{ results['Poster'] }}">{{ results['Title'] }}</img>
-</a >
+    <a class="result" href="/movie/{{ results['imdbID'] }}">
+        <img src="{{ results['Poster'] }}"><span class="result-text">{{ results['Title'] }}</span></img>
+</a>
 </li>
 {% endfor %}
 {% endblock %}
