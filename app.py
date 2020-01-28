@@ -1,12 +1,15 @@
 import os
 import requests
 from flask import Flask, render_template, url_for, request, flash, redirect
+from flask_wtf.csrf import CSRFProtect
 from forms import RegistrationForm, LoginForm
+
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 app.config['DATABASE_URI'] = os.environ.get("MONGO_URI")
+csrf = CSRFProtect(app)
 
 
 def search_result(search_text):
