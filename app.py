@@ -36,6 +36,9 @@ def index():
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
+    """
+    Renders the register.html template
+    """
     form = RegistrationForm()
     if form.validate_on_submit():
         flash(f"Account created successfully!", "success")
@@ -45,6 +48,9 @@ def register():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    """
+    Renders the login.html template
+    """
     form = LoginForm()
     if form.validate_on_submit():
         if form.email.data == "" and form.password.data == "":
