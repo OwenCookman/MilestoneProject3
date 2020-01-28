@@ -1,6 +1,8 @@
 import os
-from flask import Flask, render_template, request
 import requests
+from flask import Flask, render_template, url_for, request, flash, redirect
+from forms import RegistrationForm, LoginForm
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
@@ -34,18 +36,23 @@ def index():
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
-    """
-    Renders the register.html template
-    """
-    return render_template("register.html")
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f"Account created successfully!", "success")
+        return redirect(url_for("index"))
+    return render_template("register.html", form=form)
 
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    """
-    Renders the login.html template
-    """
-    return render_template("login.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == "" and form.password.data == "":
+            flash(f"Login Successful", "success")
+            return redirect(url_for("profile"))
+        else:
+            flash(f"Login unsuccessful, please try again", "danger")
+    return render_template("login.html", form=form)
 
 
 @app.route("/profile")
