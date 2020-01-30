@@ -2,14 +2,25 @@ import os
 import requests
 from flask import Flask, render_template, url_for, request, flash, redirect
 from flask_wtf.csrf import CSRFProtect
+from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
-
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
-app.config['DATABASE_URI'] = os.environ.get("MONGO_URI")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("MONGO_URI")
 csrf = CSRFProtect(app)
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.integer, primary_key=True)
+    username = db.Column(db.string(15), unique=True, nullable=False)
+    email = db.Column(db.string(120), unique=True, nullable=False)
+    password = db.Column(db.string(60), nullable=False)
+
+    def __repr__(self):
+        return f"user('{self.username}', '{self.email}')"
+
 
 
 def search_result(search_text):
