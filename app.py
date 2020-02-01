@@ -6,11 +6,11 @@ from flask_wtf.csrf import CSRFProtect
 from forms import RegistrationForm, LoginForm
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
-app.config['MONGO_URI'] = os.environ.get("MONGO_URI")
-csrf = CSRFProtect(app)
-db = PyMongo(app)
+APP = Flask(__name__)
+APP.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+APP.config['MONGO_URI'] = os.environ.get("MONGO_URI")
+CSRF = CSRFProtect(APP)
+DB = PyMongo(APP)
 
 
 
@@ -32,7 +32,7 @@ def search_result(search_text):
     return result_list
 
 
-@app.route("/")
+@APP.route("/")
 def index():
     """
     Renders the index.html template
@@ -40,7 +40,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/register", methods=["POST", "GET"])
+@APP.route("/register", methods=["POST", "GET"])
 def register():
     """
     Renders the register.html template
@@ -52,7 +52,7 @@ def register():
     return render_template("register.html", form=form)
 
 
-@app.route("/login", methods=["POST", "GET"])
+@APP.route("/login", methods=["POST", "GET"])
 def login():
     """
     Renders the login.html template
@@ -67,7 +67,7 @@ def login():
     return render_template("login.html", form=form)
 
 
-@app.route("/profile")
+@APP.route("/profile")
 def profile():
     """
     Renders the profile.html template
@@ -75,7 +75,7 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route("/results", methods=["POST"])
+@APP.route("/results", methods=["POST"])
 def results():
     """
     Renders the results.html template, the variable movie_results is passed
@@ -86,7 +86,7 @@ def results():
         return render_template("results.html", movie_results=search_result(search_text))
 
 
-@app.route("/movie/<imdb_id>")
+@APP.route("/movie/<imdb_id>")
 def movie(imdb_id):
     """
 The href of the generated <a> from results.html is taken from the URL
@@ -100,6 +100,6 @@ The href of the generated <a> from results.html is taken from the URL
 
 
 if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"),
+    APP.run(host=os.environ.get("IP"),
             port=os.environ.get("PORT"),
             debug=True)
