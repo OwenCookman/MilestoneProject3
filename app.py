@@ -38,7 +38,7 @@ def index():
     """
     Renders the index.html template
     """
-    return render_template("index.html")
+    return render_template("pages/index.html")
 
 
 @APP.route("/register", methods=["POST", "GET"])
@@ -50,7 +50,7 @@ def register():
     if form.validate_on_submit():
         flash(f"Account created successfully!", "success")
         return redirect(url_for("index"))
-    return render_template("register.html", form=form)
+    return render_template("pages/auth.html", form=form, login=False)
 
 
 @APP.route("/login", methods=["POST", "GET"])
@@ -65,7 +65,7 @@ def login():
             return redirect(url_for("profile"))
         else:
             flash(f"Login unsuccessful, please try again", "danger")
-    return render_template("login.html", form=form)
+    return render_template("pages/auth.html", form=form, login=True)
 
 
 @APP.route("/profile")
@@ -73,7 +73,7 @@ def profile():
     """
     Renders the profile.html template
     """
-    return render_template("profile.html")
+    return render_template("pages/profile.html")
 
 
 @APP.route("/results", methods=["POST"])
@@ -84,7 +84,7 @@ def results():
     """
     if request.method == "POST":
         search_text = request.form['search']
-        return render_template("results.html", movie_results=search_result(search_text))
+        return render_template("pages/results.html", movie_results=search_result(search_text))
 
 
 @APP.route("/movie/<imdb_id>")
@@ -95,9 +95,9 @@ The href of the generated <a> from results.html is taken from the URL
  the data from the API is then passed to the template movie.html
     """
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
-                        imdb_id + '&apikey=45a7f96')
+                        imdb_id + '&apikey=' + API_KEY)
     info = resp.json()
-    return render_template("movie.html", movie_info=info)
+    return render_template("pages/movie.html", movie_info=info)
 
 
 if __name__ == "__main__":
