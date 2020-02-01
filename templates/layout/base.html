@@ -13,19 +13,10 @@
 
 <body>
   {% include "layout/header.html" %}
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-  {% for category, message in messages %}
-  <div class="alert alert-{{ category }}">
-    {{ message }}
-  </div>
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
+  {% include "layout/messages.html" %}
   {% block content %}
   {% endblock %}
-
- {% include "layout/scripts.html" %}
+  {% include "layout/scripts.html" %}
 </body>
 
 </html>
