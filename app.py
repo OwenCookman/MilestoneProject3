@@ -2,15 +2,13 @@ import os
 import requests
 from flask_pymongo import PyMongo
 from flask import Flask, render_template, url_for, request, flash, redirect
-from flask_wtf.csrf import CSRFProtect
 from forms import RegistrationForm, LoginForm
 
 
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 APP.config['MONGO_URI'] = os.environ.get("MONGO_URI")
-APP.config['API_KEY'] = os.environ.get("API_KEY")
-CSRF = CSRFProtect(APP)
+API_KEY = os.environ.get("API_KEY")
 DB = PyMongo(APP)
 
 
