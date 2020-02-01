@@ -9,6 +9,7 @@ from forms import RegistrationForm, LoginForm
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 APP.config['MONGO_URI'] = os.environ.get("MONGO_URI")
+APP.config['API_KEY'] = os.environ.get("API_KEY")
 CSRF = CSRFProtect(APP)
 DB = PyMongo(APP)
 
@@ -23,7 +24,7 @@ def search_result(search_text):
     then returned.
     """
     resp = requests.get(
-        url='http://www.omdbapi.com/?s=' + search_text + '&apikey=45a7f96')
+        url='http://www.omdbapi.com/?s=' + search_text + '&apikey=' + API_KEY)
     result = resp.json()
     search = result['Search']
     result_list = []
