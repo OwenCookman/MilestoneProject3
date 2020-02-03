@@ -10,15 +10,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('index') }}"><i class="fas fa-home"></i></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('register') }}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
-                </li>
             </ul>
             <form action="{{ url_for('results') }}" class="form-inline my-2 my-lg-0" method="POST">
                 <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search Movies">
