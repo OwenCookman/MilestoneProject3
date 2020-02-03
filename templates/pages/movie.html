@@ -32,5 +32,10 @@
             <li>{{ movie_info['Plot'] }}</li>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <button type="button" action="{{ url_for('add_review') }}" class="btn btn-primary">Review</button>
+        </div>
+    </div>
 </div>
 {% endblock %}
