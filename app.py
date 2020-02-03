@@ -1,8 +1,8 @@
 import os
 import requests
 from flask_pymongo import PyMongo
-from flask import Flask, render_template, url_for, request, flash, redirect
-from forms import RegistrationForm, LoginForm
+from flask import Flask, render_template, url_for, request, redirect
+
 
 
 APP = Flask(__name__)
@@ -10,8 +10,6 @@ APP.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 APP.config['MONGO_URI'] = os.environ.get("MONGO_URI")
 API_KEY = os.environ.get("API_KEY")
 DB = PyMongo(APP)
-
-
 
 
 def search_result(search_text):
@@ -39,40 +37,6 @@ def index():
     return render_template("pages/index.html")
 
 
-@APP.route("/register", methods=["POST", "GET"])
-def register():
-    """
-    Renders the register.html template
-    """
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        flash(f"Account created successfully!", "success")
-        return redirect(url_for("index"))
-    return render_template("pages/auth.html", form=form, login=False)
-
-
-@APP.route("/login", methods=["POST", "GET"])
-def login():
-    """
-    Renders the login.html template
-    """
-    form = LoginForm()
-    if form.validate_on_submit():
-        if form.email.data == "" and form.password.data == "":
-            flash(f"Login Successful", "success")
-            return redirect(url_for("profile"))
-        else:
-            flash(f"Login unsuccessful, please try again", "danger")
-    return render_template("pages/auth.html", form=form, login=True)
-
-
-@APP.route("/profile")
-def profile():
-    """
-    Renders the profile.html template
-    """
-    return render_template("pages/profile.html")
-
 
 @APP.route("/results", methods=["POST"])
 def results():
@@ -97,6 +61,16 @@ The href of the generated <a> from results.html is taken from the URL
     info = resp.json()
     return render_template("pages/movie.html", movie_info=info)
 
+
+@APP.route("/add_review/<imdb_id>")
+def add_review(imdb_id):
+    """
+
+    """
+    resp = requests.get(url='http://www.omdbapi.com/?i=' +
+                        imdb_id + '&apikey=' + API_KEY)
+    info = resp.json()
+    return render_template("pages/movie.html", movie_info=info)
 
 if __name__ == "__main__":
     APP.run(host=os.environ.get("IP"),
