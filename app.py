@@ -1,7 +1,7 @@
 import os
 import requests
 from flask_pymongo import PyMongo
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, request
 
 
 
