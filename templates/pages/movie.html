@@ -1,40 +1,40 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 <div class="contaier">
-    <img src="{{ movie_info['Poster'] }}" alt="#">
+    <img class="movie-info-poster" src="{{ movie_info['Poster'] }}" alt="#">
     <h1>{{ movie_info['Title'] }}</h1>
     <div class="row">
         <div class="col-6">
-            <li>Year of release: {{ movie_info['Year'] }}</li>
+            <li class="list-display"><span class="info-text">Year of release:</span> {{ movie_info['Year'] }}</li>
         </div>
         <div class="col-6">
-            <li>Rated: {{ movie_info['Rated'] }}</li>
+            <li class="list-display"><span class="info-text">Rated:</span> {{ movie_info['Rated'] }}</li>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <li>Runtime: {{ movie_info['Runtime'] }}</li>
+            <li class="list-display"><span class="info-text">Runtime:</span> {{ movie_info['Runtime'] }}</li>
         </div>
         <div class="col-6">
-            <li>Genre: {{ movie_info['Genre'] }}</li>
+            <li class="list-display"><span class="info-text">Genre:</span> {{ movie_info['Genre'] }}</li>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <li>Director(s): {{ movie_info['Director'] }}</li>
+            <li class="list-display"><span class="info-text">Director(s):</span> {{ movie_info['Director'] }}</li>
         </div>
         <div class="col-6">
-            <li>Writer(s): {{ movie_info['Writer'] }}</li>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <li>{{ movie_info['Plot'] }}</li>
+            <li class="list-display"><span class="info-text">Writer(s):</span> {{ movie_info['Writer'] }}</li>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <button type="button" action="{{ url_for('add_review') }}" class="btn btn-primary">Review</button>
+            <li class="list-display"><span class="info-text">{{ movie_info['Plot'] }}</span></li>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button class="review-button" type="button" action="" class="btn btn-primary">Review</button>
         </div>
     </div>
 </div>
