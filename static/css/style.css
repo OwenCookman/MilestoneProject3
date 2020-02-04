@@ -11,16 +11,40 @@ body {
     margin-right: 0;
 }
 
-li {
-    list-style-type: none;
+.navbar {
+    font-weight: 700;
+    margin-bottom: 5rem;
 }
 
-.result {
-    padding-top: 30px;
-    padding-bottom: 20px;
+.result-poster {
+    min-width: 150px;
 }
 
 .result-text {
-
+    display: block;
+    font-weight: bold;
 }
+
+.movie-info-poster {
+    vertical-align: middle;
+    border-style: none;
+    margin-bottom: 2rem;
+}
+
+.list-display {
+    list-style-type: none;
+    margin-top: 3rem;
+}
+
+.review-button {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+    background-color: #000000;
+    color: #fafafa;
+}
+
+.info-text {
+    font-weight: bold;
+}
+
 
