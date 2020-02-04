@@ -8,7 +8,10 @@ body {
 
 .index-text {
     font-size: 1.5rem;
-    padding: 50px;
+    font-weight: bold;
+    padding: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .row {
