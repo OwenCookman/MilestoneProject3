@@ -6,6 +6,11 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.index-text {
+    font-size: 1.5rem;
+    padding: 50px;
+}
+
 .row {
     margin-left: 0;
     margin-right: 0;
@@ -22,7 +27,6 @@ body {
 
 .result-text {
     display: block;
-    font-weight: bold;
 }
 
 .movie-info-poster {
@@ -43,7 +47,7 @@ body {
     color: #fafafa;
 }
 
-.info-text {
+.bold {
     font-weight: bold;
 }
 

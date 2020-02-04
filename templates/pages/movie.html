@@ -5,31 +5,31 @@
     <h1>{{ movie_info['Title'] }}</h1>
     <div class="row">
         <div class="col-6">
-            <li class="list-display"><span class="info-text">Year of release:</span> {{ movie_info['Year'] }}</li>
+            <li class="list-display"><span class="bold">Year of release:</span> {{ movie_info['Year'] }}</li>
         </div>
         <div class="col-6">
-            <li class="list-display"><span class="info-text">Rated:</span> {{ movie_info['Rated'] }}</li>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <li class="list-display"><span class="info-text">Runtime:</span> {{ movie_info['Runtime'] }}</li>
-        </div>
-        <div class="col-6">
-            <li class="list-display"><span class="info-text">Genre:</span> {{ movie_info['Genre'] }}</li>
+            <li class="list-display"><span class="bold">Rated:</span> {{ movie_info['Rated'] }}</li>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <li class="list-display"><span class="info-text">Director(s):</span> {{ movie_info['Director'] }}</li>
+            <li class="list-display"><span class="bold">Runtime:</span> {{ movie_info['Runtime'] }}</li>
         </div>
         <div class="col-6">
-            <li class="list-display"><span class="info-text">Writer(s):</span> {{ movie_info['Writer'] }}</li>
+            <li class="list-display"><span class="bold">Genre:</span> {{ movie_info['Genre'] }}</li>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <li class="list-display"><span class="bold">Director(s):</span> {{ movie_info['Director'] }}</li>
+        </div>
+        <div class="col-6">
+            <li class="list-display"><span class="bold">Writer(s):</span> {{ movie_info['Writer'] }}</li>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <li class="list-display"><span class="info-text">{{ movie_info['Plot'] }}</span></li>
+            <li class="list-display"><span class="bold">{{ movie_info['Plot'] }}</span></li>
         </div>
     </div>
     <div class="row">
