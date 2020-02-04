@@ -1,11 +1,20 @@
 {% extends 'layout/base.html' %}
 {% block content %}
-Search results:
-{% for results in movie_results %}
-<li>
-    <a class="result" href="/movie/{{ results['imdbID'] }}">
-        <img src="{{ results['Poster'] }}"><span class="result-text">{{ results['Title'] }}</span></img>
-</a>
-</li>
+<h3>Search results:</h3>
+{% for results in movie_results | batch(3, '&nbsp;') %}
+<div class="row">
+    {% for results in results %}
+    <div class="col-sm-12 col-md-6 col-lg-4">
+        <li class="list-display">
+            <a href="/movie/{{ results['imdbID'] }}">
+                <img class="result-poster" src="{{ results['Poster'] }}"></img>
+            </a>
+            <a href="/movie/{{ results['imdbID'] }}">
+                <span class="result-text">{{ results['Title'] }}</span>
+            </a>
+        </li>
+    </div>
+    {% endfor %}
+</div>
 {% endfor %}
 {% endblock %}
