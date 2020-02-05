@@ -1,11 +1,32 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-<form method="POST" action="">
-    <input type='text' name='username' id='username'>
-    <input type='text' name='comment' id='comment'>
-    <input type='number' name='score' id='score' max='5' min='0'>
-    <input type='hidden' name='movieID' id='movieID' value="{{ movie_info['imdbID'] }}">
-    <button type="button" class="btn btn-primary">Submit</button>
-</form>
+<div class="row">
+    <div class="col">
+        <h2 class="bold">Leave a Review</h2>
+    </div>
+</div>
+<div class="row review-form">
+    <form method="POST" action="">
+        <div class="col-12">
+            <input type='text' name='username' id='username' placeholder="Username">
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label for="comments"></label>
+                <textarea class="form-control" id="comments" rows="4"
+                    placeholder="Type your comments here..."></textarea>
+            </div>
+        </div>
+        <div class="col-12">
+            <span class="text-muted">Please give a score from 1 to 5</span>
+            <input type='number' name='score' id='score' max='5' min='0'>
+            
+        </div>
+        <div class="col-12">
+            <input type='hidden' name='movieID' id='movieID' value="{{ movie_info['imdbID'] }}">
+            <button type="button" class="btn btn-success button-spacing">Submit</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
