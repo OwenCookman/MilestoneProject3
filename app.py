@@ -4,12 +4,11 @@ from flask_pymongo import PyMongo
 from flask import Flask, render_template, request
 
 
-
 APP = Flask(__name__)
 APP.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 APP.config['MONGO_URI'] = os.environ.get("MONGO_URI")
 API_KEY = os.environ.get("API_KEY")
-DB = PyMongo(APP)
+mongo = PyMongo(APP)
 
 
 def search_result(search_text):
@@ -37,7 +36,6 @@ def index():
     return render_template("pages/index.html")
 
 
-
 @APP.route("/results", methods=["POST"])
 def results():
     """
@@ -59,18 +57,32 @@ The href of the generated <a> from results.html is taken from the URL
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
                         imdb_id + '&apikey=' + API_KEY)
     info = resp.json()
+
     return render_template("pages/movie.html", movie_info=info)
 
 
 @APP.route("/add_review/<imdb_id>")
 def add_review(imdb_id):
     """
-
     """
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
                         imdb_id + '&apikey=' + API_KEY)
     info = resp.json()
-    return render_template("pages/movie.html", movie_info=info)
+
+    return render_template("pages/review.html", movie_info=info)
+
+
+@APP.route("/submit_review", methods=["POST"])
+def submit_review():
+    review = {'username': request.form.get('username'),
+              'comments': request.form.get('comments'),
+              'score': request.form.get('score'),
+              'movieID': request.form.get('movieID')}
+    print(mongo.db.Reviews.insert_one(review))
+    print(mongo.db.reviews.find_one({'username': request.form.get('username')}))
+    return
+
+
 
 if __name__ == "__main__":
     APP.run(host=os.environ.get("IP"),
