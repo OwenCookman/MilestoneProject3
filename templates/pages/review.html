@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class="row review-form">
-    <form method="POST" action="">
+    <form action="{{ url_for('submit_review') }}" method="POST">
         <div class="col-12">
             <input type='text' name='username' id='username' placeholder="Username">
         </div>
@@ -19,13 +19,21 @@
             </div>
         </div>
         <div class="col-12">
-            <span class="text-muted">Please give a score from 1 to 5</span>
-            <input type='number' name='score' id='score' max='5' min='0'>
+            <div class="form-group">
+                <label for="score" class="text-muted">Please give a score from 1 to 5</label>
+                <select class="form-control score-select" id="score">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
             
         </div>
         <div class="col-12">
             <input type='hidden' name='movieID' id='movieID' value="{{ movie_info['imdbID'] }}">
-            <button type="button" class="btn btn-success button-spacing">Submit</button>
+            <button type="button" type="submit" class="btn btn-success button-spacing">Submit</button>
         </div>
     </form>
 </div>
