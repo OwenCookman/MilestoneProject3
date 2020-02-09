@@ -38,4 +38,30 @@
         </form>
     </div>
 </div>
+
+{% for review in reviews %}
+<div class="row">
+    <div class="col">
+        <h3>{{ reviews['username'] }}</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>{{ reviews['comments'] }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>{{ reviews['score'] }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a>Edit</a>
+    </div>
+    <div class="col">
+        <a>Delete</a>
+    </div>
+</div>
+{% endfor %}
 {% endblock %}
