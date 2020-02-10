@@ -1,7 +1,7 @@
 import os
 import requests
 from flask_pymongo import PyMongo
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 
 APP = Flask(__name__)
@@ -58,7 +58,11 @@ The href of the generated <a> from results.html is taken from the URL
                         imdb_id + '&apikey=' + API_KEY)
     info = resp.json()
 
-    return render_template("pages/movie.html", movie_info=info)
+    get_reviews = mongo.db.Reviews.find_one({})
+    review_list = get_reviews
+    print(review_list)
+
+    return render_template("pages/movie.html", movie_info=info, reviews=review_list)
 
 
 @APP.route("/add_review/<imdb_id>")
@@ -72,15 +76,14 @@ def add_review(imdb_id):
     return render_template("pages/review.html", movie_info=info)
 
 
-@APP.route("/submit_review", methods=["POST"])
+@APP.route("/submit_review/", methods=["POST"])
 def submit_review():
     review = {'username': request.form.get('username'),
               'comments': request.form.get('comments'),
               'score': request.form.get('score'),
               'movieID': request.form.get('movieID')}
-    print(mongo.db.Reviews.insert_one(review))
-    print(mongo.db.reviews.find_one({'username': request.form.get('username')}))
-    return
+    mongo.db.Reviews.insert_one(review)
+    return redirect(url_for('index'))
 
 
 
