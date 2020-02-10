@@ -1,7 +1,6 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 <h3>Search results:</h3>
-{% if movie_results %}
 {% for results in movie_results | batch(3, '&nbsp;') %}
 <div class="row">
     {% for results in results %}
@@ -18,7 +17,4 @@
     {% endfor %}
 </div>
 {% endfor %}
-{% else %}
-<p>Sorry, there are no results for your search please check the spelling and try again</p>
-{% endif %}
 {% endblock %}
