@@ -85,6 +85,16 @@ def submit_review():
     mongo.db.Reviews.insert_one(review)
     return redirect(url_for('index'))
 
+@APP.route("/edit_review", methods=["POST"])
+def edit_review():
+
+    return
+
+@APP.route("/delete_review", methods=["POST"])
+def delete_review():
+
+    return
+
 
 
 if __name__ == "__main__":
