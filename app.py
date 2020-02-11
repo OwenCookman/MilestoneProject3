@@ -22,7 +22,7 @@ def search_result(search_text):
     resp = requests.get(
         url='http://www.omdbapi.com/?s=' + search_text + '&apikey=' + API_KEY)
     result = resp.json()
-    search = result['Search']
+    search = result.get('Search', [])
     result_list = []
     for i in search:
         result_list.append(i)
@@ -108,6 +108,7 @@ def edit_review():
 @APP.route("/delete_review/<review_id>", methods=["POST"])
 def delete_review(review_id):
     """
+    The review_id generted in the 
     """
     mongo.db.Reviews.delete_one({'_id':ObjectId(review_id)})
 
