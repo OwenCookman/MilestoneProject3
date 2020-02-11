@@ -42,17 +42,17 @@
 {% for review in reviews %}
 <div class="row">
     <div class="col">
-        <h3>User: {{ reviews['username'] }}</h3>
+        <h3>User: {{ review['username'] }}</h3>
     </div>
 </div>
 <div class="row">
     <div class="col">
-        <p>{{ reviews['comments'] }}</p>
+        <p>{{ review['comments'] }}</p>
     </div>
 </div>
 <div class="row">
     <div class="col">
-        <p>Score: {{ reviews['score'] }}</p>
+        <p>Score: {{ review['score'] }}</p>
     </div>
 </div>
 <div class="row">
