@@ -108,7 +108,9 @@ def edit_review():
 @APP.route("/delete_review/<review_id>", methods=["POST"])
 def delete_review(review_id):
     """
-    The review_id generted in the 
+    The review_id generted in the form action for the delete review button
+     is passed to the database which searches for the corresponding
+     document and deletes it, then redirects to the index.
     """
     mongo.db.Reviews.delete_one({'_id':ObjectId(review_id)})
 
