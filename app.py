@@ -58,8 +58,11 @@ The href of the generated <a> from results.html is taken from the URL
                         imdb_id + '&apikey=' + API_KEY)
     info = resp.json()
 
-    get_reviews = mongo.db.Reviews.find_one({})
-    review_list = get_reviews
+    review_list = []
+
+    get_reviews = mongo.db.Reviews.find({'movieID':imdb_id})
+    for review in get_reviews:
+        review_list.append(review)
     print(review_list)
 
     return render_template("pages/movie.html", movie_info=info, reviews=review_list)
