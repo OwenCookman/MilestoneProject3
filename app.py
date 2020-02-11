@@ -52,7 +52,11 @@ def movie(imdb_id):
     """
 The href of the generated <a> from results.html is taken from the URL
  and converted in to a python variable which is passed to the API
- the data from the API is then passed to the template movie.html
+ the data from the API is then passed to the template movie.html.
+ A query is sent to the Mongo database to find any reviews with
+ the movieID that corresponds with the imdb_id taken from the API
+ this data is then iterated through and appended to an empty list
+ which is passed back to the template to render.
     """
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
                         imdb_id + '&apikey=' + API_KEY)
@@ -63,7 +67,6 @@ The href of the generated <a> from results.html is taken from the URL
     get_reviews = mongo.db.Reviews.find({'movieID':imdb_id})
     for review in get_reviews:
         review_list.append(review)
-    print(review_list)
 
     return render_template("pages/movie.html", movie_info=info, reviews=review_list)
 
@@ -71,6 +74,8 @@ The href of the generated <a> from results.html is taken from the URL
 @APP.route("/add_review/<imdb_id>")
 def add_review(imdb_id):
     """
+    Passes the same information from the movie() function but to the
+     review.html template
     """
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
                         imdb_id + '&apikey=' + API_KEY)
@@ -81,6 +86,11 @@ def add_review(imdb_id):
 
 @APP.route("/submit_review/", methods=["POST"])
 def submit_review():
+    """
+    The variable review is created by taking information from the form
+     on the review.html template, this is then passed as an argument
+      to the Mongo database. The page is then redirected to index.html
+    """
     review = {'username': request.form.get('username'),
               'comments': request.form.get('comments'),
               'score': request.form.get('score'),
@@ -90,11 +100,15 @@ def submit_review():
 
 @APP.route("/edit_review", methods=["POST"])
 def edit_review():
-
+    """
+    """
     return
 
-@APP.route("/delete_review", methods=["POST"])
-def delete_review():
+@APP.route("/delete_review/<review_id>", methods=["POST"])
+def delete_review(review_id):
+    """
+    """
+    mongo.db.delete_one({'_id':review_id})
 
     return
 
