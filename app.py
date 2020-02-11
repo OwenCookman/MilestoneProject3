@@ -1,6 +1,7 @@
 import os
 import requests
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 from flask import Flask, render_template, request, redirect, url_for
 
 
@@ -108,9 +109,9 @@ def edit_review():
 def delete_review(review_id):
     """
     """
-    mongo.db.delete_one({'_id':review_id})
+    mongo.db.Reviews.delete_one({'_id':ObjectId(review_id)})
 
-    return
+    return redirect(url_for('index'))
 
 
 
