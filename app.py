@@ -1,6 +1,7 @@
 import os
 import requests
 from flask_pymongo import PyMongo
+from pymongo import MongoClient
 from bson.objectid import ObjectId
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -10,6 +11,9 @@ APP.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 APP.config['MONGO_URI'] = os.environ.get("MONGO_URI")
 API_KEY = os.environ.get("API_KEY")
 mongo = PyMongo(APP)
+mongo_client = MongoClient('mongodb://localhost:27017')
+db = mongo_client.MoviestoreDB
+col = db["Reviews"]
 
 
 def search_result(search_text):
@@ -65,7 +69,7 @@ The href of the generated <a> from results.html is taken from the URL
 
     review_list = []
 
-    get_reviews = mongo.db.Reviews.find({'movieID':imdb_id})
+    get_reviews = mongo.db.Reviews.find({'movieID': imdb_id})
     for review in get_reviews:
         review_list.append(review)
 
@@ -99,11 +103,24 @@ def submit_review():
     mongo.db.Reviews.insert_one(review)
     return redirect(url_for('index'))
 
-@APP.route("/edit_review", methods=["POST"])
-def edit_review():
+@APP.route("/edit_review/<review_id>", methods=["POST"])
+def edit_review(review_id):
     """
     """
-    return
+    old_review = mongo.db.Reviews.find_one({'_id': ObjectId(review_id)})
+
+    info = old_review['movieID']
+    username = request.form.get('username')
+    comments = request.form.get('comments')
+    score = request.form.get('score')
+
+    review = {'username': username,
+              'comments': comments,
+              'score': score,
+              'movieID': info}
+    print(review)
+    mongo.db.Reviews.replace_one(old_review, review)
+    return render_template("pages/edit_review.html", movie_info=info)
 
 @APP.route("/delete_review/<review_id>", methods=["POST"])
 def delete_review(review_id):
@@ -112,7 +129,7 @@ def delete_review(review_id):
      is passed to the database which searches for the corresponding
      document and deletes it, then redirects to the index.
     """
-    mongo.db.Reviews.delete_one({'_id':ObjectId(review_id)})
+    mongo.db.Reviews.delete_one({'_id': ObjectId(review_id)})
 
     return redirect(url_for('index'))
 
