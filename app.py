@@ -107,20 +107,23 @@ def submit_review():
 def edit_review(review_id):
     """
     """
-    old_review = mongo.db.Reviews.find_one({'_id': ObjectId(review_id)})
+    mongo.db.Reviews.find_one({'_id':ObjectId(review_id)})
 
-    info = old_review['movieID']
-    username = request.form.get('username')
-    comments = request.form.get('comments')
-    score = request.form.get('score')
+    return render_template("pages/edit-review.html")
 
-    review = {'username': username,
-              'comments': comments,
-              'score': score,
-              'movieID': info}
-    print(review)
+@APP.route("/update_review/<review_id>", methods=["POST"])
+def update_review(review_id):
+    """
+    """
+    old_review = mongo.db.Reviews.find_one({'id':ObjectId(review_id)})
+    movie_id = old_review['movieID']
+
+    review = {'username': request.form.get('username'),
+              'comments': request.form.get('comments'),
+              'score': request.form.get('score'),
+              'movieID': movie_id}
     mongo.db.Reviews.replace_one(old_review, review)
-    return render_template("pages/edit_review.html", movie_info=info)
+    return render_template("index")
 
 @APP.route("/delete_review/<review_id>", methods=["POST"])
 def delete_review(review_id):
