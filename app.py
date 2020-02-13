@@ -1,7 +1,6 @@
 import os
 import requests
 from flask_pymongo import PyMongo
-from pymongo import MongoClient
 from bson.objectid import ObjectId
 from flask import Flask, render_template, request, redirect, url_for
 
@@ -11,9 +10,7 @@ APP.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 APP.config['MONGO_URI'] = os.environ.get("MONGO_URI")
 API_KEY = os.environ.get("API_KEY")
 mongo = PyMongo(APP)
-mongo_client = MongoClient('mongodb://localhost:27017')
-db = mongo_client.MoviestoreDB
-col = db["Reviews"]
+
 
 
 def search_result(search_text):
@@ -36,7 +33,7 @@ def search_result(search_text):
 @APP.route("/")
 def index():
     """
-    Renders the index.html template
+    Renders the index.html template.
     """
     return render_template("pages/index.html")
 
@@ -45,7 +42,7 @@ def index():
 def results():
     """
     Renders the results.html template, the variable movie_results is passed
-    to render the results from search_results()
+    to render the results from search_results().
     """
     if request.method == "POST":
         search_text = request.form['search']
@@ -80,7 +77,7 @@ The href of the generated <a> from results.html is taken from the URL
 def add_review(imdb_id):
     """
     Passes the same information from the movie() function but to the
-     review.html template
+     review.html template.
     """
     resp = requests.get(url='http://www.omdbapi.com/?i=' +
                         imdb_id + '&apikey=' + API_KEY)
@@ -94,7 +91,7 @@ def submit_review():
     """
     The variable review is created by taking information from the form
      on the review.html template, this is then passed as an argument
-      to the Mongo database. The page is then redirected to index.html
+      to the Mongo database. The page is then redirected to index.html.
     """
     review = {'username': request.form.get('username'),
               'comments': request.form.get('comments'),
@@ -103,27 +100,38 @@ def submit_review():
     mongo.db.Reviews.insert_one(review)
     return redirect(url_for('index'))
 
+
 @APP.route("/edit_review/<review_id>", methods=["POST"])
 def edit_review(review_id):
     """
+    Renders the edit-review.html page passing the review_id through as 
+    a python variable.
     """
-    mongo.db.Reviews.find_one({'_id':ObjectId(review_id)})
+    review = mongo.db.Reviews.find_one({'_id': ObjectId(review_id)})
 
-    return render_template("pages/edit-review.html")
+    return render_template("pages/edit-review.html", review_info=review)
+
 
 @APP.route("/update_review/<review_id>", methods=["POST"])
 def update_review(review_id):
     """
+    Searches the database for a review with a matching _id to the review_id
+     variable, movie_id is created to pass in to the new_review unedited
+     the username, comments and score are then taken from the form which is 
+     then passed on to the database to find the old_review and update the 
+     relevent data.
     """
-    old_review = mongo.db.Reviews.find_one({'id':ObjectId(review_id)})
+    old_review = mongo.db.Reviews.find_one({'_id': ObjectId(review_id)})
     movie_id = old_review['movieID']
 
-    review = {'username': request.form.get('username'),
-              'comments': request.form.get('comments'),
-              'score': request.form.get('score'),
-              'movieID': movie_id}
-    mongo.db.Reviews.replace_one(old_review, review)
-    return render_template("index")
+    new_review = {'$set': {'username': request.form.get('username'),
+                           'comments': request.form.get('comments'),
+                           'score': request.form.get('score'),
+                           'movieID': movie_id}}
+    mongo.db.Reviews.find_one_and_update(
+        old_review, new_review)
+    return redirect(url_for('index'))
+
 
 @APP.route("/delete_review/<review_id>", methods=["POST"])
 def delete_review(review_id):
@@ -135,7 +143,6 @@ def delete_review(review_id):
     mongo.db.Reviews.delete_one({'_id': ObjectId(review_id)})
 
     return redirect(url_for('index'))
-
 
 
 if __name__ == "__main__":
