@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class="row review-form">
-    <form action="{{ url_for('update_review', review_id=review['_id']) }}" method="POST">
+    <form action="{{ url_for('update_review', review_id=review_info['_id']) }}" method="POST">
         <div class="col-12">
             <input type="text" name="username" id="username" placeholder="Username">
         </div>
