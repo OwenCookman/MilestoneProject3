@@ -104,7 +104,7 @@ def submit_review():
 @APP.route("/edit_review/<review_id>", methods=["POST"])
 def edit_review(review_id):
     """
-    Renders the edit-review.html page passing the review_id through as 
+    Renders the edit-review.html page passing the review_id through as
     a python variable.
     """
     review = mongo.db.Reviews.find_one({'_id': ObjectId(review_id)})
