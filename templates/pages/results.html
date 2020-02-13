@@ -4,10 +4,10 @@
 {% if movie_results == [] %}
 <p>Sorry there are no results for your search, please check the spelling and try again</p>
 {% endif %}
-{% for results in movie_results | batch(3, '&nbsp;') %}
+{% for results in movie_results | batch(2, '&nbsp;') %}
 <div class="row">
     {% for results in results %}
-    <div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="col-sm-12 col-md-6 col-lg-6">
         <li class="list-display">
             <a href="/movie/{{ results['imdbID'] }}">
                 <img class="result-poster" src="{{ results['Poster'] }}"></img>
