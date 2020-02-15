@@ -27,6 +27,14 @@ As someone who has recently watched a movie, I would like to leave a review of t
 - selecting edit review will allow the review to be edited
 - selecting delete review will remove the review
 
+#### User who would like to know more details about a movie
+As someone who enjoys watching movies, I would like to know more details about a particular movie such as who it was directed by.
+
+- The Home Page gives a quick explenation of what the website is used for and how to use it
+- searching for a movie returns that movie and any related titles
+- selecting a movie opens a page with information about the movie
+- Below the movie poster is information about the movie such as the run time, its rating, the director(s) and writer(s)
+
 ### Manual Testing
 
 #### Navbar
