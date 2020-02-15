@@ -117,8 +117,8 @@ def update_review(review_id):
     """
     Searches the database for a review with a matching _id to the review_id
      variable, movie_id is created to pass in to the new_review unedited
-     the username, comments and score are then taken from the form which is 
-     then passed on to the database to find the old_review and update the 
+     the username, comments and score are then taken from the form which is
+     then passed on to the database to find the old_review and update the
      relevent data.
     """
     old_review = mongo.db.Reviews.find_one({'_id': ObjectId(review_id)})
@@ -140,6 +140,7 @@ def delete_review(review_id):
      is passed to the database which searches for the corresponding
      document and deletes it, then redirects to the index.
     """
+    
     mongo.db.Reviews.delete_one({'_id': ObjectId(review_id)})
 
     return redirect(url_for('index'))
