@@ -7,13 +7,19 @@ body {
     color: #fafafa;
     font-size: 16px;
     font-family: 'Open Sans', sans-serif;
-    z-index: -1;
+    z-index: -2;
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     min-height: 100vh;
+}
+
+.opaque-bg {
+    min-height: 100vh;
+    z-index: -1;
+    background-color: rgba(34, 34, 34, 0.5);
 }
 
 a {
@@ -26,6 +32,7 @@ a {
     padding: 30px;
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 0;
 }
 
 .row {
