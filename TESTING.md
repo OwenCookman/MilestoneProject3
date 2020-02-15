@@ -3,7 +3,7 @@
 
 Below are the different ways in which I tested this project.
 
-- The HTML and CSS code were validated using the [**W3C Markup Validation Service**](https://validator.w3.org/) website
+- The CSS code was validated using the [**W3C Markup Validation Service**](https://validator.w3.org/) website
 
 ### User Stories Tested
 
