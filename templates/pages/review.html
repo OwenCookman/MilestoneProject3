@@ -1,5 +1,4 @@
 {% extends 'layout/base.html' %}
-
 {% block content %}
 <div class="row">
     <div class="col">
@@ -15,8 +14,10 @@
             <input class="comment-box" type="text" name="comments" id="comments"
                 placeholder="Type your comments here..." required>
         </div>
+        <div class="col">
+            <p class="muted">Leave a score from 1-5</p>
+        </div>
         <div class="col-12">
-            Score (1-5):
             <input type="number" name="score" id="score" min="1" max="5" required>
         </div>
         <div class="col-12">
