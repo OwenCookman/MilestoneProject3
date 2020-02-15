@@ -92,5 +92,16 @@ a {
     margin: 0 auto;
 }
 
+.modal-header {
+    text-align: center;
+    border-bottom: none;
+}
 
+.modal-content {
+    background-color: #212121;
+}
 
+.modal-footer {
+    text-align: center;
+    border-top: none;
+}
