@@ -104,3 +104,9 @@ a {
     border-width: 1px;
     border-color: rgba(170, 170, 170, 0.5);
 }
+
+.review-text {
+    max-width: 500px;
+    display: block;
+    margin: 0 auto;
+}
