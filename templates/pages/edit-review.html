@@ -9,14 +9,15 @@
 <div class="row review-form">
     <form action="{{ url_for('update_review', review_id=review_info['_id']) }}" method="POST">
         <div class="col-12">
-            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="text" name="username" id="username" placeholder="Username" required>
         </div>
         <div class="col-12">
             <input class="comment-box" type="text" name="comments" id="comments"
-                placeholder="Type your comments here...">
+                placeholder="Type your comments here..." required> 
         </div>
         <div class="col-12">
-            <input type="number" name="score" id="score" min="1" max="5">
+            <p>Score from 1-5</p>
+            <input type="number" name="score" id="score" min="1" max="5" required>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-success button-spacing">Submit</button>
