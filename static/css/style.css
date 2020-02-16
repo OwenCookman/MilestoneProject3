@@ -22,8 +22,26 @@ body {
     background-color: rgba(34, 34, 34, 0.5);
 }
 
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.button-spacing {
+    margin: 20px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
 a {
     color: #aaaaaa;
+}
+
+.navbar {
+    font-weight: 700;
+    margin-bottom: 5rem;
 }
 
 .index-text {
@@ -33,16 +51,6 @@ a {
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 0;
-}
-
-.row {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.navbar {
-    font-weight: 700;
-    margin-bottom: 5rem;
 }
 
 .result-poster {
@@ -61,7 +69,11 @@ a {
 
 .list-display {
     list-style-type: none;
-    margin-top: 3rem;
+    margin-top: 50px;
+}
+
+.review-btn {
+    margin: 50px;
 }
 
 .review-form {
@@ -78,30 +90,17 @@ a {
     margin-bottom: 20px;
 }
 
-.button-spacing {
-    margin: 20px;
-}
-
-.bold {
-    font-weight: bold;
-}
-
 .score-select {
     width: 10%;
     display: block;
     margin: 0 auto;
 }
 
-.modal-header {
-    text-align: center;
-    border-bottom: none;
-}
-
-.modal-content {
-    background-color: #212121;
-}
-
-.modal-footer {
-    text-align: center;
-    border-top: none;
+.review-container {
+    overflow-wrap: break-word;
+    display: block;
+    margin: 0 auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(170, 170, 170, 0.5);
 }
