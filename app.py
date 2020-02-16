@@ -140,7 +140,6 @@ def delete_review(review_id):
      is passed to the database which searches for the corresponding
      document and deletes it, then redirects to the index.
     """
-    
     mongo.db.Reviews.delete_one({'_id': ObjectId(review_id)})
 
     return redirect(url_for('index'))
