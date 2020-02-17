@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 
+/* General Page Styling */
 body {
     background-color: #212121;
     background: url("../images/background.png");
@@ -44,15 +45,15 @@ a {
     margin-bottom: 5rem;
 }
 
+/* Styling for Introductory Text */
 .index-text {
-    font-size: 1.5rem;
-    font-weight: bold;
     padding: 30px;
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 0;
 }
 
+/* Styling for Search Results */
 .result-poster {
     min-width: 150px;
 }
@@ -61,17 +62,34 @@ a {
     display: block;
 }
 
+.list-display {
+    list-style-type: none;
+    margin-top: 50px;
+}
+
+/* Styling for Movie page */
 .movie-info-poster {
     vertical-align: middle;
     border-style: none;
     margin-bottom: 2rem;
 }
 
-.list-display {
-    list-style-type: none;
-    margin-top: 50px;
+.review-text {
+    max-width: 500px;
+    display: block;
+    margin: 0 auto;
 }
 
+.review-container {
+    overflow-wrap: break-word;
+    display: block;
+    margin: 0 auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(170, 170, 170, 0.5);
+}
+
+/* Styling for review forms */
 .review-btn {
     margin: 50px;
 }
@@ -92,21 +110,6 @@ a {
 
 .score-select {
     width: 10%;
-    display: block;
-    margin: 0 auto;
-}
-
-.review-container {
-    overflow-wrap: break-word;
-    display: block;
-    margin: 0 auto;
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgba(170, 170, 170, 0.5);
-}
-
-.review-text {
-    max-width: 500px;
     display: block;
     margin: 0 auto;
 }
