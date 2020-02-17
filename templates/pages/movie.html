@@ -1,6 +1,6 @@
 {% extends 'layout/base.html' %}
 {% block content %}
-<!--The movies information is passed to the template and rendered on to the page-->
+<!--Movie Information Render-->
 <img class="movie-info-poster" src="{{ movie_info['Poster'] }}" alt="#">
 <h1>{{ movie_info['Title'] }}</h1>
 <div class="row">
@@ -39,7 +39,7 @@
         </form>
     </div>
 </div>
-<!--Review information is passed to the template and iterated through to render each individual review-->
+<!--Review Information Render-->
 {% for review in reviews %}
 <div class="review-container">
     <div class="row">
