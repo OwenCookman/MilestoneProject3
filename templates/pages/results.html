@@ -1,9 +1,11 @@
 {% extends 'layout/base.html' %}
 {% block content %}
 <h3>Search results:</h3>
+<!--No Results Message-->
 {% if movie_results == [] %}
 <p>Sorry there are no results for your search, please check the spelling and try again</p>
 {% endif %}
+<!--Results Render-->
 {% for results in movie_results | batch(2, '&nbsp;') %}
 <div class="row">
     {% for results in results %}
