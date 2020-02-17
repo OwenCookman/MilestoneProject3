@@ -15,11 +15,14 @@
 </head>
 
 <body>
+  <!--Opaque overlay to dim down the background image-->
   <div class="opaque-bg">
+    <!--render templates-->
     {% include "layout/header.html" %}
     {% block content %}
     {% endblock %}
   </div>
+  <!--scripts-->
   {% include "layout/scripts.html" %}
 </body>
 
